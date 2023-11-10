@@ -1,10 +1,15 @@
 class Paths {
 	constructor() {
-		this.SAVE = '/api/saveGame';
+		this.SAVE_GAME = '/api/saveGame';
+		this.SAVE_DATA = '/api/saveData';
 	}
 
-	get save() {
-		return this.SAVE;
+	get saveGame() {
+		return this.SAVE_GAME;
+	}
+
+	get saveData() {
+		return this.SAVE_DATA;
 	}
 }
 

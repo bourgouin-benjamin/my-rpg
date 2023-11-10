@@ -18,7 +18,7 @@ function Home() {
 	// };
 
 	const saveGame = async () => {
-		const response = await fetch(PATHS.save, {
+		const response = await fetch(PATHS.saveGame, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -29,18 +29,41 @@ function Home() {
 		console.log(data);
 	};
 
+	const saveData = async (datas) => {
+		const requestBody = {
+			key: Object.keys(datas)[0],
+			value: Object.values(datas)[0],
+		};
+
+		const response = await fetch(PATHS.saveData, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(requestBody),
+		});
+		const data = await response.json();
+		console.log(data);
+	};
+
 	const onNameSubmit = (e) => {
 		e.preventDefault();
+		let formData = new FormData(e.target);
+		saveData(Object.fromEntries(formData));
 	};
 
 	return (
 		<main>
 			<h1>Quel est votre nom, aventurier ?</h1>
 			<form onSubmit={onNameSubmit}>
-				<input type="text" name="name" id="name" />
+				<input
+					type="text"
+					name="adventurerName"
+					id="adventurerName"
+				/>
 				<button type="submit">Valider</button>
 			</form>
-			<button onClick={saveGame}>Test ajout datas</button>
+			<button onClick={saveGame}>Sauvegarder la partie</button>
 		</main>
 	);
 }

@@ -15,8 +15,6 @@ export default async function handler(req, res) {
 
 	// 	res.status(200).json(objectData);
 	// }
-
-	// UPDATE
 	if (req.method === 'POST') {
 		try {
 			const temporarySaveData = await fsPromises.readFile(
@@ -28,10 +26,10 @@ export default async function handler(req, res) {
 
 			await fsPromises.writeFile(DATA_SAVE_PATH, newSave);
 
-			res.status(200).json({ message: 'Data stored successfully' });
+			res.status(200).json({ message: 'Game saved successfull' });
 		} catch (error) {
 			console.error(error);
-			res.status(500).json({ message: 'Error storing data' });
+			res.status(500).json({ message: 'Error saving the game' });
 		}
 	}
 }
