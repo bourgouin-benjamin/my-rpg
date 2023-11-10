@@ -1,19 +1,24 @@
 // Librairie
 import { useRouter } from 'next/router';
 
+// Component
+import Roots from '../helpers/saveRoots';
+
+const ROOTS = new Roots();
+
 function Home() {
 	// Variable
 	const router = useRouter();
 
 	// Méthode
 	const fetchData = async () => {
-		const response = await fetch('/api/storeJsonData');
+		const response = await fetch(ROOTS.save);
 		const data = await response.json();
 		console.log('data', data);
 	};
 
 	const saveData = async () => {
-		const response = await fetch('/api/storeJsonData', {
+		const response = await fetch(ROOTS.save, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
