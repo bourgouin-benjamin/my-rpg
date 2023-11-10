@@ -11,22 +11,19 @@ function Home() {
 	const router = useRouter();
 
 	// Méthode
-	const fetchData = async () => {
-		const response = await fetch(PATHS.save);
-		const data = await response.json();
-		console.log('data', data);
-	};
+	// const fetchData = async () => {
+	// 	const response = await fetch(PATHS.save);
+	// 	const data = await response.json();
+	// 	console.log('data', data);
+	// };
 
-	const saveData = async () => {
+	const saveGame = async () => {
 		const response = await fetch(PATHS.save, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({
-				name: 'pepito',
-				email: 'pepito@pepito.com',
-			}),
+			body: '',
 		});
 		const data = await response.json();
 		console.log(data);
@@ -41,11 +38,9 @@ function Home() {
 			<h1>Quel est votre nom, aventurier ?</h1>
 			<form onSubmit={onNameSubmit}>
 				<input type="text" name="name" id="name" />
-				<button type="submit" onClick={fetchData}>
-					Valider
-				</button>
+				<button type="submit">Valider</button>
 			</form>
-			<button onClick={saveData}>Test ajout datas</button>
+			<button onClick={saveGame}>Test ajout datas</button>
 		</main>
 	);
 }

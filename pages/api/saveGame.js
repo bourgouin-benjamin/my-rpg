@@ -1,30 +1,32 @@
 import fsPromises from 'fs/promises';
 import path from 'path';
 
-const DATA_FILE_PATH = path.join(process.cwd(), 'json/save.json');
+const DATA_SAVE_PATH = path.join(process.cwd(), 'json/save.json');
+const DATA_TEMPORARY_SAVE_PATH = path.join(
+	process.cwd(),
+	'json/temporarySave.json'
+);
 
 export default async function handler(req, res) {
 	// GET
-	if (req.method === 'GET') {
-		const jsonData = await fsPromises.readFile(DATA_FILE_PATH);
-		const objectData = JSON.parse(jsonData);
+	// if (req.method === 'GET') {
+	// 	const jsonData = await fsPromises.readFile(DATA_FILE_PATH);
+	// 	const objectData = JSON.parse(jsonData);
 
-		res.status(200).json(objectData);
-	}
+	// 	res.status(200).json(objectData);
+	// }
 
-	// POST
-	else if (req.method === 'POST') {
+	// UPDATE
+	if (req.method === 'POST') {
 		try {
-			const jsonData = await fsPromises.readFile(DATA_FILE_PATH);
-			const objectData = JSON.parse(jsonData);
+			const temporarySaveData = await fsPromises.readFile(
+				DATA_TEMPORARY_SAVE_PATH
+			);
+			const temporarySaveObjectData = JSON.parse(temporarySaveData);
 
-			const newData = req.body;
+			const newSave = JSON.stringify(temporarySaveObjectData);
 
-			objectData.push(newData);
-
-			const updatedData = JSON.stringify(objectData);
-
-			await fsPromises.writeFile(DATA_FILE_PATH, updatedData);
+			await fsPromises.writeFile(DATA_SAVE_PATH, newSave);
 
 			res.status(200).json({ message: 'Data stored successfully' });
 		} catch (error) {
