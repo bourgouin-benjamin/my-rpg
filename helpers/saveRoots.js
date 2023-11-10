@@ -1,4 +1,4 @@
-class Roots {
+class Paths {
 	constructor() {
 		this.SAVE = '/api/saveGame';
 	}
@@ -8,4 +8,4 @@ class Roots {
 	}
 }
 
-export default Roots;
+export default Paths;

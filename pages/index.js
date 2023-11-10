@@ -2,9 +2,9 @@
 import { useRouter } from 'next/router';
 
 // Component
-import Roots from '../helpers/saveRoots';
+import Paths from '../helpers/saveRoots';
 
-const ROOTS = new Roots();
+const PATHS = new Paths();
 
 function Home() {
 	// Variable
@@ -12,13 +12,13 @@ function Home() {
 
 	// Méthode
 	const fetchData = async () => {
-		const response = await fetch(ROOTS.save);
+		const response = await fetch(PATHS.save);
 		const data = await response.json();
 		console.log('data', data);
 	};
 
 	const saveData = async () => {
-		const response = await fetch(ROOTS.save, {
+		const response = await fetch(PATHS.save, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
