@@ -21,10 +21,14 @@ export default async function handler(req, res) {
 				DATA_TEMPORARY_SAVE_PATH
 			);
 			const temporarySaveObjectData = JSON.parse(temporarySaveData);
-
 			const newSave = JSON.stringify(temporarySaveObjectData);
-
 			await fsPromises.writeFile(DATA_SAVE_PATH, newSave);
+
+			const reset = {};
+			await fsPromises.writeFile(
+				DATA_TEMPORARY_SAVE_PATH,
+				JSON.stringify(reset)
+			);
 
 			res.status(200).json({ message: 'Game saved successfull' });
 		} catch (error) {

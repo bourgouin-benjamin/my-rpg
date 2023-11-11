@@ -1,5 +1,6 @@
 // Librairie
 import { useRouter } from 'next/router';
+import SaveButton from '../helpers/elements/saveButton';
 
 function Home() {
 	// Variable
@@ -21,6 +22,7 @@ function Home() {
 
 	return (
 		<main>
+			<SaveButton />
 			<button onClick={loadGame}>Continuer</button>
 			<button onClick={startNewGame}>Nouvelle partie</button>
 		</main>
