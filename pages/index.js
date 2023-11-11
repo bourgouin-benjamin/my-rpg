@@ -2,13 +2,25 @@
 import { useRouter } from 'next/router';
 import SaveButton from '../helpers/elements/saveButton';
 
+// Class
+import Paths from '../helpers/classHelpers/paths';
+const PATHS = new Paths();
+
 function Home() {
 	// Variable
 	const router = useRouter();
 
 	// Méthode
 	const loadGame = async () => {
-		console.log('loading');
+		const response = await fetch(PATHS.loadGame, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: '',
+		});
+		const message = await response.json();
+		console.log(response.status);
 	};
 
 	const startNewGame = async () => {
@@ -16,7 +28,16 @@ function Home() {
 			'Veuillez écrire "continuer" pour commencer une nouvelle partie. Attention, toutes données de la précédente sauvegarde seront effacées, cette action est irréversible.'
 		);
 		if (confirmation === 'continuer') {
-			console.log('new game');
+			const deleteOldSave = await fetch(PATHS.startNewGame, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: '',
+			});
+			if (deleteOldSave.status === 200) {
+				loadGame();
+			}
 		}
 	};
 

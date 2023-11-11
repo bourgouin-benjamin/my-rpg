@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 	if (req.method === 'POST') {
 		try {
 			const saveData = await fsPromises.readFile(DATA_SAVE_PATH);
-			const saveDataObject = JSON.parse(saveDataObject);
+			const saveDataObject = JSON.parse(saveData);
 			const load = JSON.stringify(saveDataObject);
 			await fsPromises.writeFile(DATA_TEMPORARY_SAVE_PATH, load);
 			res.status(200).json({ message: 'Game load successfully' });
