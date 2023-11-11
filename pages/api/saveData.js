@@ -8,8 +8,6 @@ const DATA_TEMPORARY_SAVE_PATH = path.join(
 
 export default async function handler(req, res) {
 	// POST
-
-	console.log(req.body);
 	if (req.method === 'POST') {
 		try {
 			const temporarySaveData = await fsPromises.readFile(
