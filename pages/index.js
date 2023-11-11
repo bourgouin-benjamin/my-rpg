@@ -1,10 +1,12 @@
 // Librairie
 import { useRouter } from 'next/router';
 
-// Component
-import Paths from '../helpers/saveRoots';
-
+// Class
+import Paths from '../helpers/classHelpers/paths';
 const PATHS = new Paths();
+
+// Component
+import SaveButton from '../helpers/elements/saveButton';
 
 function Home() {
 	// Variable
@@ -16,18 +18,6 @@ function Home() {
 	// 	const data = await response.json();
 	// 	console.log('data', data);
 	// };
-
-	const saveGame = async () => {
-		const response = await fetch(PATHS.saveGame, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: '',
-		});
-		const data = await response.json();
-		console.log(data);
-	};
 
 	const saveData = async (datas) => {
 		const requestBody = {
@@ -54,6 +44,7 @@ function Home() {
 
 	return (
 		<main>
+			<SaveButton />
 			<h1>Quel est votre nom, aventurier ?</h1>
 			<form onSubmit={onNameSubmit}>
 				<input
@@ -63,7 +54,6 @@ function Home() {
 				/>
 				<button type="submit">Valider</button>
 			</form>
-			<button onClick={saveGame}>Sauvegarder la partie</button>
 		</main>
 	);
 }
