@@ -8,13 +8,6 @@ const DATA_TEMPORARY_SAVE_PATH = path.join(
 );
 
 export default async function handler(req, res) {
-	// GET
-	// if (req.method === 'GET') {
-	// 	const jsonData = await fsPromises.readFile(DATA_FILE_PATH);
-	// 	const objectData = JSON.parse(jsonData);
-
-	// 	res.status(200).json(objectData);
-	// }
 	if (req.method === 'POST') {
 		try {
 			const temporarySaveData = await fsPromises.readFile(

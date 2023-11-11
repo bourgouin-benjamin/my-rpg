@@ -6,7 +6,7 @@ import SaveButton from '../helpers/elements/saveButton';
 import Paths from '../helpers/classHelpers/paths';
 const PATHS = new Paths();
 
-function Home() {
+export default function Home(props) {
 	// Variable
 	const router = useRouter();
 
@@ -20,7 +20,7 @@ function Home() {
 			body: '',
 		});
 		const message = await response.json();
-		console.log(response.status);
+		console.log(message);
 	};
 
 	const startNewGame = async () => {
@@ -43,11 +43,26 @@ function Home() {
 
 	return (
 		<main>
-			<SaveButton />
-			<button onClick={loadGame}>Continuer</button>
+			{'gameStep' in props.gameData ? (
+				<button onClick={loadGame}>Continuer</button>
+			) : (
+				''
+			)}
+
 			<button onClick={startNewGame}>Nouvelle partie</button>
 		</main>
 	);
 }
 
-export default Home;
+export async function getServerSideProps() {
+	const response = await fetch(process.env.URL + PATHS.loadGame, {
+		method: 'GET',
+	});
+	const gameData = await response.json();
+
+	return {
+		props: {
+			gameData: JSON.parse(JSON.stringify(gameData)),
+		},
+	};
+}

@@ -8,8 +8,24 @@ const DATA_TEMPORARY_SAVE_PATH = path.join(
 );
 
 export default async function handler(req, res) {
+	// GET
+	if (req.method === 'GET') {
+		try {
+			const jsonData = await fsPromises.readFile(
+				DATA_TEMPORARY_SAVE_PATH
+			);
+			const gameData = JSON.parse(jsonData);
+			res.status(200).json(gameData);
+		} catch (error) {
+			console.error(error);
+			res
+				.status(500)
+				.json({ message: 'Error retrieving game datas' });
+		}
+	}
+
 	// POST
-	if (req.method === 'POST') {
+	else if (req.method === 'POST') {
 		try {
 			const saveData = await fsPromises.readFile(DATA_SAVE_PATH);
 			const saveDataObject = JSON.parse(saveData);
