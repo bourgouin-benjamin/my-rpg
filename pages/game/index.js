@@ -1,9 +1,9 @@
 // Class
-import Paths from '../helpers/classHelpers/paths';
+import Paths from '../../helpers/classHelpers/paths';
 const PATHS = new Paths();
 
 // Component
-import SaveButton from '../helpers/elements/saveButton';
+import SaveButton from '../../helpers/elements/saveButton';
 
 function Game() {
 	// Méthode
